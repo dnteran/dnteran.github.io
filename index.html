@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f2a14">
+<title>Latam Dolar Hoy — Dólar BCV, paralelo, USDT y más monedas de Latinoamérica</title>
+<meta name="description" content="Latam Dolar Hoy: consulta el dólar BCV, paralelo, USDT, euro y monedas de Latinoamérica, convierte montos, mira el gráfico y planifica tus compras. App gratis para Android.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Latam Dolar Hoy — la tasa del dólar en tu bolsillo">
+<meta property="og:description" content="Dólar BCV, paralelo, USDT y más monedas de Latinoamérica. Conversor, gráfico, alertas de precio y calculadora de compras. Gratis en Google Play.">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --bg:#08140b;
+    --bg2:#0f2a14;
+    --card:#12301a;
+    --card2:#173a20;
+    --line:#245a30;
+    --text:#f2f8f3;
+    --muted:#a9c4b0;
+    --verde:#66E21A;
+    --verde2:#43A047;
+    --oro:#FFCB1F;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .wrap{width:100%;max-width:1060px;margin:0 auto;padding:0 20px;}
+
+  /* ---------- Barra ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:20;background:rgba(8,20,11,.88);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{display:flex;align-items:center;gap:14px;height:60px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;text-decoration:none;}
+  .logo svg{width:30px;height:30px;flex-shrink:0;}
+  .nav nav{margin-left:auto;display:flex;gap:6px;align-items:center;}
+  .nav nav a{
+    text-decoration:none;color:var(--muted);font-size:14px;padding:8px 12px;border-radius:10px;
+  }
+  .nav nav a:hover{color:var(--text);background:var(--card);}
+  .nav nav a.cta{background:var(--verde);color:#0F2A00;font-weight:700;}
+  .nav nav a.cta:hover{background:#7aef33;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:56px 0 48px;
+    background:radial-gradient(900px 420px at 85% 0%,rgba(102,226,26,.18),transparent 60%),
+               radial-gradient(700px 380px at 0% 100%,rgba(255,203,31,.10),transparent 60%);
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;}
+  .hero h1{font-size:clamp(30px,5.2vw,50px);line-height:1.1;margin:0 0 14px;letter-spacing:-.5px;}
+  .hero h1 em{font-style:normal;color:var(--verde);}
+  .hero p.lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted);margin:0 0 26px;max-width:520px;}
+  .botones{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:16px;
+    padding:14px 24px;border-radius:14px;border:2px solid transparent;transition:.15s;min-height:52px;
+  }
+  .btn.principal{background:var(--verde);color:#0F2A00;}
+  .btn.principal:hover{background:#7aef33;transform:translateY(-1px);}
+  .btn.sec{border-color:var(--line);color:var(--text);}
+  .btn.sec:hover{background:var(--card);}
+  .btn svg{width:22px;height:22px;flex-shrink:0;}
+  .nota-chica{font-size:13px;color:var(--muted);margin-top:14px;}
+
+  /* ---------- Teléfono de ejemplo ---------- */
+  .tel{display:flex;justify-content:center;}
+  .tel-marco{
+    width:270px;max-width:100%;background:#0b1a0f;border:3px solid #2c6a3a;border-radius:34px;padding:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.55),0 0 0 6px rgba(102,226,26,.06);
+  }
+  .tel-barra{
+    background:var(--verde2);color:#fff;border-radius:14px 14px 4px 4px;padding:12px 14px;font-weight:800;font-size:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .pill{
+    margin:12px 0 10px;background:var(--verde);color:#0F2A00;font-weight:800;border-radius:30px;
+    padding:9px 14px;font-size:14px;display:flex;align-items:center;gap:8px;
+  }
+  .pill i{width:22px;height:22px;border-radius:50%;background:#fff;display:inline-block;flex-shrink:0;}
+  .caja{
+    background:#102a16;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;
+  }
+  .caja small{display:block;color:var(--muted);font-size:11px;}
+  .caja b{font-size:22px;}
+  .mini{display:flex;gap:6px;margin-top:6px;}
+  .mini span{flex:1;background:#102a16;border:1px solid var(--line);border-radius:10px;padding:7px 4px;text-align:center;font-size:11px;color:var(--muted);}
+  .grafico{margin-top:10px;background:#102a16;border:1px solid var(--line);border-radius:14px;padding:8px;}
+  .grafico svg{display:block;width:100%;height:60px;}
+  .ejemplo{text-align:center;font-size:11px;color:var(--muted);margin-top:8px;}
+
+  /* ---------- Secciones ---------- */
+  section{padding:56px 0;}
+  section h2{font-size:clamp(24px,4vw,34px);margin:0 0 10px;letter-spacing:-.3px;}
+  section .sub{color:var(--muted);margin:0 0 30px;max-width:620px;}
+  .alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+  .tarjeta{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  }
+  .tarjeta .ico{
+    width:46px;height:46px;border-radius:14px;background:var(--card2);display:grid;place-items:center;
+    font-size:23px;margin-bottom:12px;
+  }
+  .tarjeta h3{margin:0 0 6px;font-size:17px;}
+  .tarjeta p{margin:0;color:var(--muted);font-size:14.5px;}
+
+  .monedas{display:flex;flex-wrap:wrap;gap:10px;}
+  .monedas span{
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14.5px;
+  }
+
+  .pasos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:paso;}
+  .paso{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px 20px;}
+  .paso::before{
+    counter-increment:paso;content:counter(paso);position:absolute;top:-14px;left:18px;
+    width:30px;height:30px;border-radius:50%;background:var(--verde);color:#0F2A00;font-weight:800;
+    display:grid;place-items:center;
+  }
+  .paso h3{margin:6px 0 6px;font-size:17px;}
+  .paso p{margin:0;color:var(--muted);font-size:14.5px;}
+
+  details{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 18px;margin-bottom:10px;
+  }
+  summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--verde);font-size:22px;line-height:1;}
+  details[open] summary::after{content:"–";}
+  details p{margin:0 0 14px;color:var(--muted);font-size:15px;}
+
+  .final{
+    text-align:center;background:linear-gradient(135deg,#1a4a25,#0f2a14);border:1px solid var(--line);
+    border-radius:26px;padding:44px 22px;
+  }
+  .final h2{margin-bottom:10px;}
+  .final p{color:var(--muted);margin:0 auto 24px;max-width:520px;}
+
+  footer{padding:36px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:flex-start;}
+  footer a{color:var(--verde);}
+  footer p{margin:0;}
+  .aviso{font-size:12.5px;max-width:560px;}
+
+  /* ---------- Celular ---------- */
+  @media (max-width:860px){
+    .hero{padding:36px 0 34px;}
+    .hero .wrap{grid-template-columns:1fr;gap:30px;}
+    .tel{order:2;}
+    .grid{grid-template-columns:1fr 1fr;}
+    .pasos{grid-template-columns:1fr;gap:26px;}
+    section{padding:44px 0;}
+    .nav nav a:not(.cta){display:none;}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr;}
+    .btn{width:100%;justify-content:center;}
+    .final{padding:34px 18px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Latam Dolar Hoy, ir al inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#E8A91A"/>
+        <circle cx="32" cy="32" r="24" fill="#1B8A3A"/>
+        <text x="32" y="43" text-anchor="middle" font-size="32" font-weight="800" fill="#FFCB1F" font-family="Arial,sans-serif">$</text>
+      </svg>
+      Latam Dolar Hoy
+    </a>
+    <nav aria-label="Principal">
+      <a href="#funciones">Funciones</a>
+      <a href="#monedas">Monedas</a>
+      <a href="#preguntas">Preguntas</a>
+      <a class="cta" href="https://play.google.com/store/apps/details?id=com.latam.dolardehoy">Descargar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- ===================== HERO ===================== -->
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>La tasa del dólar de hoy, <em>en tu bolsillo</em></h1>
+        <p class="lead">
+          Consulta el dólar BCV, el paralelo, el USDT, el euro y las monedas de Latinoamérica. Convierte montos al instante,
+          mira cómo cambia el precio y planifica tus compras. Gratis para Android.
+        </p>
+        <div class="botones">
+          <a class="btn principal" href="https://play.google.com/store/apps/details?id=com.latam.dolardehoy">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1zm12.4 12.4-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM13 11.7 3.7 21l.2.1c.4.2.9.2 1.5-.1l11.3-6.4-3.7-3.9zM13 11.5l3.7-3.9L5.4 1.2c-.6-.3-1.1-.3-1.5-.1l-.2.1L13 11.5z"/></svg>
+            Disponible en Google Play
+          </a>
+          <a class="btn sec" href="#funciones">Ver funciones</a>
+        </div>
+        <p class="nota-chica">Gratis · Sin registrarte · En español</p>
+      </div>
+
+      <div class="tel" aria-hidden="true">
+        <div class="tel-marco">
+          <div class="tel-barra">💱 Latam Dolar Hoy</div>
+          <div class="pill"><i></i> Dólar BCV</div>
+          <div class="caja"><small>Dólar estadounidense (USD)</small><b>1,00</b></div>
+          <div class="caja"><small>Bolívares (Bs)</small><b>La tasa del día</b></div>
+          <div class="mini"><span>1</span><span>5</span><span>10</span><span>50</span><span>100</span></div>
+          <div class="grafico">
+            <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#66E21A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"
+                points="0,48 25,44 50,46 75,36 100,38 125,26 150,28 175,16 200,10"/>
+            </svg>
+          </div>
+          <p class="ejemplo">Imagen de ejemplo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== FUNCIONES ===================== -->
+  <section id="funciones">
+    <div class="wrap">
+      <h2>Todo lo que necesitas para tus cuentas</h2>
+      <p class="sub">Una app sencilla, rápida y pensada para el día a día en Venezuela y Latinoamérica.</p>
+      <div class="grid">
+        <div class="tarjeta">
+          <div class="ico">💵</div>
+          <h3>Varias tasas en un solo lugar</h3>
+          <p>Dólar BCV, paralelo, USDT y euro, siempre a mano. Elige la que necesitas con un toque.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="ico">🔄</div>
+          <h3>Conversor en los dos sentidos</h3>
+          <p>Escribe un monto arriba o abajo y se calcula al instante. Incluye una tabla rápida con montos comunes.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="ico">📈</div>
+          <h3>Gráfico de fluctuación</h3>
+          <p>Mira cómo ha cambiado el precio en los últimos 7 o 30 días y decide con más calma.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="ico">🔔</div>
+          <h3>Alertas de precio</h3>
+          <p>Te avisamos con una notificación cuando la tasa llegue al valor que tú elijas.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="ico">🛒</div>
+          <h3>Calculadora de compras</h3>
+          <p>Arma tu lista, ponle un presupuesto y lee precios con la cámara. Sabes cuánto gastas en dólares y en bolívares.</p>
+        </div>
+        <div class="tarjeta">
+          <div class="ico">📲</div>
+          <h3>Comparte y ten el widget</h3>
+          <p>Comparte la tasa como imagen con QR y agrega el widget a tu pantalla de inicio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MONEDAS ===================== -->
+  <section id="monedas" class="alt">
+    <div class="wrap">
+      <h2>Monedas de Latinoamérica</h2>
+      <p class="sub">Además de Venezuela, la app trae las tasas de otros países para que compares sin salir de ella.</p>
+      <div class="monedas" role="list">
+        <span role="listitem">🇻🇪 Dólar BCV</span>
+        <span role="listitem">🇻🇪 Dólar paralelo</span>
+        <span role="listitem">💲 USDT</span>
+        <span role="listitem">💶 Euro BCV</span>
+        <span role="listitem">🇨🇴 Peso colombiano</span>
+        <span role="listitem">🇦🇷 Peso argentino</span>
+        <span role="listitem">🇨🇱 Peso chileno</span>
+        <span role="listitem">🇲🇽 Peso mexicano</span>
+        <span role="listitem">🇺🇾 Peso uruguayo</span>
+        <span role="listitem">🇵🇪 Sol peruano</span>
+        <span role="listitem">🇧🇷 Real brasileño</span>
+        <span role="listitem">🇧🇴 Boliviano</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PASOS ===================== -->
+  <section>
+    <div class="wrap">
+      <h2>Empieza en un minuto</h2>
+      <p class="sub">No necesitas crear cuenta ni dar datos personales.</p>
+      <div class="pasos">
+        <div class="paso">
+          <h3>Descarga la app</h3>
+          <p>Búscala como “Latam Dolar Hoy” en Google Play o entra con el botón de abajo.</p>
+        </div>
+        <div class="paso">
+          <h3>Elige tu moneda</h3>
+          <p>Toca la píldora verde y escoge el país y la tasa que quieres ver.</p>
+        </div>
+        <div class="paso">
+          <h3>Calcula y comparte</h3>
+          <p>Convierte, mira el gráfico, crea una alerta o comparte la tasa con tus contactos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PREGUNTAS ===================== -->
+  <section id="preguntas" class="alt">
+    <div class="wrap">
+      <h2>Preguntas frecuentes</h2>
+      <p class="sub">Lo que más nos preguntan.</p>
+      <details>
+        <summary>¿La app es gratis?</summary>
+        <p>Sí, puedes descargarla y usarla gratis. Se mantiene con anuncios, que se muestran con cuidado para no estorbar.</p>
+      </details>
+      <details>
+        <summary>¿De dónde salen las tasas?</summary>
+        <p>De fuentes públicas de cotización que se actualizan en el día. Son una referencia informativa: el valor que pagues o cobres en cada operación puede variar.</p>
+      </details>
+      <details>
+        <summary>¿La app cambia dinero o me pide datos de mi banco?</summary>
+        <p>No. Latam Dolar Hoy solo muestra tasas y hace cálculos. No realiza operaciones de cambio ni pide datos bancarios.</p>
+      </details>
+      <details>
+        <summary>¿Funciona sin internet?</summary>
+        <p>Sí, puedes ver las últimas tasas que guardó la app. Para actualizarlas necesitas conexión.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa con la cámara?</summary>
+        <p>Solo se usa si tú quieres leer el precio de una etiqueta. La imagen se procesa en tu teléfono y no se guarda ni se envía.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== LLAMADA FINAL ===================== -->
+  <section>
+    <div class="wrap">
+      <div class="final">
+        <h2>Ten la tasa del día siempre contigo</h2>
+        <p>Descarga Latam Dolar Hoy y deja de buscar el precio del dólar en mil sitios.</p>
+        <a class="btn principal" href="https://play.google.com/store/apps/details?id=com.latam.dolardehoy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1zm12.4 12.4-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.7 2.1-.1-.1zM13 11.7 3.7 21l.2.1c.4.2.9.2 1.5-.1l11.3-6.4-3.7-3.9zM13 11.5l3.7-3.9L5.4 1.2c-.6-.3-1.1-.3-1.5-.1l-.2.1L13 11.5z"/></svg>
+          Descargar en Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p><strong style="color:var(--text)">Latam Dolar Hoy</strong> · Team Pana</p>
+      <p>Contacto: <a href="mailto:teampanaof@gmail.com">teampanaof@gmail.com</a></p>
+      <!-- Cuando tengas la política de privacidad publicada, agrega aquí su enlace:
+           <p><a href="LINK_DE_TU_POLITICA">Política de privacidad</a></p> -->
+    </div>
+    <p class="aviso">
+      Las tasas mostradas son informativas y pueden diferir de las que apliquen en cada operación. Latam Dolar Hoy no es una casa de cambio
+      ni ofrece servicios financieros. Google Play y el logotipo de Google Play son marcas de Google LLC.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
